@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система заданий с решениями</title>
+    <style>
+        .group {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .task {
+            margin: 15px 0;
+            padding: 15px;
+            border-left: 3px solid #4CAF50;
+            background-color: #fff;
+            position: relative;
+        }
+
+        .task-id {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .answer-input {
+            margin: 10px 0;
+            padding: 8px;
+            width: 200px;
+        }
+
+        .check-btn {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #444;
+            margin-bottom: 5px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+
+        .solution {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #4682b4;
+            border-radius: 3px;
+        }
+
+        .show-solution {
+            margin-top: 10px;
+            color: #4682b4;
+            cursor: pointer;
+            text-decoration: underline;
+            display: none;
+        }
+
+        .show-solution:hover {
+            color: #36648b;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Форма поиска по ID -->
+    <div>
+        <label for="task-search">Поиск задания по ID:</label>
+        <input type="text" id="task-search" placeholder="Например: 010001">
+        <button onclick="showTaskById()">Показать</button>
+        <div id="search-error" class="error-message"></div>
+    </div>
+
+    <!-- Форма выбора группы -->
+    <form>
+        <label for="groups">Выберите группу:</label>
+        <select id="groups" name="groups">
+            <option value="01">Группа 01</option>
+            <option value="02">Группа 02</option>
+            <option value="03">Группа 03</option>
+        </select>
+        <button type="button" onclick="showSelectedGroup()">Открыть</button>
+    </form>
+
+    <!-- Группа 01 -->
+    <div id="group-01" class="group">
+        <h2>Группа 01</h2>
+
+        <div class="task" id="task-010001">
+            <span class="task-id">ID: 010001</span>
+            <h3>Задание 1.1</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt.
+            </p>
+            <p>Правильный ответ: "яблоко"</p>
+            <input type="text" class="answer-input" placeholder="Введите ваш ответ">
+            <button class="check-btn" onclick="checkAnswer('010001', 'яблоко')">Проверить</button>
+            <div class="result" id="result-010001"></div>
+            <div class="show-solution" onclick="toggleSolution('010001')">Показать решение</div>
+            <div class="solution" id="solution-010001">
+                <p><strong>Решение:</strong> Для решения этой задачи нужно рассмотреть все возможные варианты. Сначала
+                    определите основные параметры, затем постройте график зависимости. Ответ "яблоко" получается при
+                    подстановке крайних значений.</p>
+            </div>
+        </div>
+
+        <div class="task" id="task-010002">
+            <span class="task-id">ID: 010002</span>
+            <h3>Задание 1.2</h3>
+            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+            <p>Правильный ответ: "солнце"</p>
+            <input type="text" class="answer-input" placeholder="Введите ваш ответ">
+            <button class="check-btn" onclick="checkAnswer('010002', 'солнце')">Проверить</button>
+            <div class="result" id="result-010002"></div>
+            <div class="show-solution" onclick="toggleSolution('010002')">Показать решение</div>
+            <div class="solution" id="solution-010002">
+                <p><strong>Решение:</strong> В этом задании необходимо проанализировать солнечную активность. Используя
+                    закон Стефана-Больцмана, мы получаем ответ "солнце" как единственно верный вариант.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Группа 02 -->
+    <div id="group-02" class="group">
+        <h2>Группа 02</h2>
+
+        <div class="task" id="task-020001">
+            <span class="task-id">ID: 020001</span>
+            <h3>Задание 2.1</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            </p>
+            <p>Правильный ответ: "книга"</p>
+            <input type="text" class="answer-input" placeholder="Введите ваш ответ">
+            <button class="check-btn" onclick="checkAnswer('020001', 'книга')">Проверить</button>
+            <div class="result" id="result-020001"></div>
+            <div class="show-solution" onclick="toggleSolution('020001')">Показать решение</div>
+            <div class="solution" id="solution-020001">
+                <p><strong>Решение:</strong> Ответ "книга" следует из анализа литературных источников. Проведите
+                    сравнение с эталонными образцами, и вы получите этот результат.</p>
+            </div>
+        </div>
+
+        <div class="task" id="task-020002">
+            <span class="task-id">ID: 020002</span>
+            <h3>Задание 2.2</h3>
+            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                laborum.</p>
+            <p>Правильный ответ: "вода"</p>
+            <input type="text" class="answer-input" placeholder="Введите ваш ответ">
+            <button class="check-btn" onclick="checkAnswer('020002', 'вода')">Проверить</button>
+            <div class="result" id="result-020002"></div>
+            <div class="show-solution" onclick="toggleSolution('020002')">Показать решение</div>
+            <div class="solution" id="solution-020002">
+                <p><strong>Решение:</strong> Химический анализ показывает, что правильный ответ - "вода". Проверьте pH
+                    уровень и температуру кипения для подтверждения.</p>
+            </div>
+        </div>
+
+        <div class="task" id="task-020003">
+            <span class="task-id">ID: 020003</span>
+            <h3>Задание 2.3</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt.
+            </p>
+            <p>Правильный ответ: "земля"</p>
+            <input type="text" class="answer-input" placeholder="Введите ваш ответ">
+            <button class="check-btn" onclick="checkAnswer('020003', 'земля')">Проверить</button>
+            <div class="result" id="result-020003"></div>
+            <div class="show-solution" onclick="toggleSolution('020003')">Показать решение</div>
+            <div class="solution" id="solution-020003">
+                <p><strong>Решение:</strong> Геологические исследования подтверждают ответ "земля". Изучите состав почвы
+                    и сделайте соответствующие выводы.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Группа 03 -->
+    <div id="group-03" class="group">
+        <h2>Группа 03</h2>
+
+        <div class="task" id="task-030001">
+            <span class="task-id">ID: 030001</span>
+            <h3>Задание 3.1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat.</p>
+            <p>Правильный ответ: "огонь"</p>
+            <input type="text" class="answer-input" placeholder="Введите ваш ответ">
+            <button class="check-btn" onclick="checkAnswer('030001', 'огонь')">Проверить</button>
+            <div class="result" id="result-030001"></div>
+            <div class="show-solution" onclick="toggleSolution('030001')">Показать решение</div>
+            <div class="solution" id="solution-030001">
+                <p><strong>Решение:</strong> Термодинамический анализ приводит нас к ответу "огонь". Изучите процесс
+                    горения для полного понимания.</p>
+            </div>
+        </div>
+
+        <div class="task" id="task-030002">
+            <span class="task-id">ID: 030002</span>
+            <h3>Задание 3.2</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            </p>
+            <p>Правильный ответ: "воздух"</p>
+            <input type="text" class="answer-input" placeholder="Введите ваш ответ">
+            <button class="check-btn" onclick="checkAnswer('030002', 'воздух')">Проверить</button>
+            <div class="result" id="result-030002"></div>
+            <div class="show-solution" onclick="toggleSolution('030002')">Показать решение</div>
+            <div class="solution" id="solution-030002">
+                <p><strong>Решение:</strong> Анализ атмосферного давления и состава воздуха подтверждает ответ "воздух".
+                    Проведите замеры в разных условиях.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Показать конкретное задание по ID
+        function showTaskById() {
+            const taskSearch = document.getElementById('task-search');
+            const taskId = taskSearch.value.trim();
+            const errorElement = document.getElementById('search-error');
+
+            // Очищаем предыдущие ошибки
+            errorElement.textContent = "";
+
+            // Скрыть все группы и задания
+            document.querySelectorAll('.group, .task').forEach(el => {
+                el.classList.remove('active');
+                el.style.display = 'none';
+            });
+
+            // Проверить формат ID (6 цифр)
+            if (!/^\d{6}$/.test(taskId)) {
+                errorElement.textContent = "Введите 6-значный ID задания (например: 010001)";
+                return;
+            }
+
+            const taskElement = document.getElementById(`task-${taskId}`);
+
+            if (taskElement) {
+                // Очищаем поле поиска
+                taskSearch.value = "";
+
+                // Показать родительскую группу и её заголовок
+                const groupId = taskId.substring(0, 2);
+                const groupElement = document.getElementById(`group-${groupId}`);
+                groupElement.classList.add('active');
+                groupElement.style.display = 'block';
+                groupElement.querySelector('h2').style.display = 'block';
+
+                // Показать только нужное задание
+                taskElement.style.display = 'block';
+            } else {
+                errorElement.textContent = "Задание с таким ID не найдено";
+            }
+        }
+
+        // Показать выбранную группу (все задания)
+        function showSelectedGroup() {
+            // Очищаем поле поиска и сообщения об ошибках
+            document.getElementById('task-search').value = "";
+            document.getElementById('search-error').textContent = "";
+
+            // Скрыть все группы
+            document.querySelectorAll('.group').forEach(group => {
+                group.classList.remove('active');
+                group.style.display = 'none';
+            });
+
+            // Показать выбранную группу
+            const selectedGroup = document.getElementById('groups').value;
+            const groupElement = document.getElementById(`group-${selectedGroup}`);
+            groupElement.classList.add('active');
+            groupElement.style.display = 'block';
+
+            // Показать все задания в группе
+            groupElement.querySelectorAll('.task').forEach(task => {
+                task.style.display = 'block';
+            });
+        }
+
+        // Проверить ответ
+        function checkAnswer(taskId, correctAnswer) {
+            const inputElement = document.querySelector(`#task-${taskId} .answer-input`);
+            const resultElement = document.getElementById(`result-${taskId}`);
+            const solutionBtn = document.querySelector(`#task-${taskId} .show-solution`);
+            const solutionElement = document.querySelector(`#task-${taskId} .solution`);
+            const userAnswer = inputElement.value.trim();
+
+            // Если ответ не введен - ничего не делаем
+            if (userAnswer === "") {
+                resultElement.textContent = "";
+                resultElement.className = "result";
+                solutionBtn.style.display = 'none';
+                solutionElement.style.display = 'none';
+                return;
+            }
+
+            // Показываем кнопку решения
+            solutionBtn.style.display = 'block';
+            solutionBtn.textContent = 'Показать решение';
+            solutionElement.style.display = 'none';
+
+            if (userAnswer.toLowerCase() === correctAnswer) {
+                resultElement.textContent = "✓ Правильно!";
+                resultElement.className = "result correct";
+            } else {
+                resultElement.textContent = "✗ Неправильно. Попробуйте ещё раз.";
+                resultElement.className = "result incorrect";
+            }
+        }
+
+        // Показать/скрыть решение
+        function toggleSolution(taskId) {
+            const solutionElement = document.querySelector(`#task-${taskId} .solution`);
+            const solutionBtn = document.querySelector(`#task-${taskId} .show-solution`);
+
+            if (solutionElement.style.display === 'none') {
+                solutionElement.style.display = 'block';
+                solutionBtn.textContent = 'Скрыть решение';
+            } else {
+                solutionElement.style.display = 'none';
+                solutionBtn.textContent = 'Показать решение';
+            }
+        }
+    </script>
+</body>
+
+</html>
