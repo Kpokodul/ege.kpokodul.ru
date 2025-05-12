@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подготовка к экзаменам</title>
+	
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100%;
+            position: relative;
+        }
+
+        .half {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .half::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.25);
+            transition: filter 0.4s ease;
+        }
+
+        .left::before {
+            background-image: url('img/bg-ing.jpg');
+        }
+
+        .right::before {
+            background-image: url('img/bg-math.jpg');
+        }
+
+        .half:hover::before {
+            filter: brightness(0.15);
+        }
+
+        .text-container {
+            position: relative;
+            color: white;
+            text-align: left;
+            z-index: 2;
+            width: 80%;
+        }
+
+        .exam-type {
+            font-size: 5vw;
+            font-weight: bold;
+            margin-bottom: 0.5vw;
+            line-height: 1;
+        }
+
+        .subject {
+            font-size: 4vw;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .info-overlay {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background-color: rgba(10, 10, 10, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 10;
+            padding: 4vw;
+            box-sizing: border-box;
+            text-align: justify;
+            overflow: hidden;
+        }
+
+        .info-overlay.right {
+            right: 0;
+        }
+
+        .info-overlay.left {
+            left: 0;
+        }
+
+        .info-title {
+            font-size: 2.2vw;
+            font-weight: bold;
+            margin-bottom: 2vw;
+            color: white;
+            width: 100%;
+            text-align: left;
+        }
+
+        .info-description {
+            font-size: 1.4vw;
+            line-height: 1.6;
+            margin-bottom: 2.5vw;
+            color: #e0e0e0;
+            width: 100%;
+            text-align: justify;
+        }
+
+        .info-date {
+            font-size: 1.6vw;
+            color: white;
+            font-weight: bold;
+            width: 100%;
+            text-align: left; 
+        }
+
+        /* Логика hover-эффектов */
+        .left:hover~.info-overlay.right,
+        .right:hover~.info-overlay.left {
+            opacity: 1;
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #222;
+            padding: 3vw;
+            border-radius: 10px;
+            max-width: 50%;
+            text-align: right;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-title {
+            font-size: 2vw;
+            color: #fff;
+            margin-bottom: 1.5vw;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .modal-text {
+            font-size: 1.3vw;
+            color: #ccc;
+            margin-bottom: 2vw;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .modal-close {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 0.8vw 2vw;
+            font-size: 1.2vw;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .modal-close:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="inf/index.html" class="half left">
+            <div class="text-container">
+                <div class="exam-type">КЕГЭ</div>
+                <div class="subject">Информатика</div>
+            </div>
+        </a>
+
+        <div class="half right" id="math-link">
+            <div class="text-container">
+                <div class="exam-type">ЕГЭ</div>
+                <div class="subject">Профильная математика</div>
+            </div>
+        </div>
+
+        <div class="info-overlay right">
+            <div class="info-title">Информатика</div>
+            <div class="info-description">
+                Экзамен по информатике и ИКТ проверяет знания и навыки в области программирования, алгоритмизации,
+                основ теоретической информатики. Включает 27 заданий. Особое внимание уделяется практическому программированию и решению алгоритмических задач. Продолжительность экзаменам 235 минут (3 часа 55 минут).
+            </div>
+            <div class="info-date">Дата проведения: 10-11 июня 2025</div>
+        </div>
+
+        <div class="info-overlay left">
+            <div class="info-title">Профильная математика</div>
+            <div class="info-description">
+                Профильный уровень ЕГЭ по математике предназначен для поступающих в вузы на технические, экономические
+                и технологические направления. Экзамен состоит из 19 заданий. Проверяются знания алгебры, математического анализа, геометрии, теории вероятностей и статистики, теории чисел. На экзамен отводится 235 минут (3 часа 55 минут).
+            </div>
+            <div class="info-date">Дата проведения: 26-27 мая 2025</div>
+        </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="development-modal">
+        <div class="modal-content">
+            <div class="modal-title">Раздел в разработке</div>
+            <div class="modal-text">
+                Раздел "Профильная математика" в настоящее время находится в разработке.<br>
+                Попробуйте воспользоваться другими сайтами для подготовки к ЕГЭ по математике.
+            </div>
+            <button class="modal-close" id="modal-close">Закрыть</button>
+        </div>
+    </div>
+
+    <script>
+        // Обработчик клика по математике
+        document.getElementById('math-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('development-modal').style.display = 'flex';
+        });
+
+        // Закрытие модального окна
+        document.getElementById('modal-close').addEventListener('click', function () {
+            document.getElementById('development-modal').style.display = 'none';
+        });
+
+        // Закрытие при клике вне модального окна
+        document.getElementById('development-modal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

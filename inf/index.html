@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КЕГЭ Информатика 2025</title>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Шапка */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-subtitle {
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+
+        /* Навигация */
+        nav {
+            background-color: #34495e;
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            background-color: #3d566e;
+        }
+
+        .nav-link.active {
+            background-color: #1abc9c;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #16a085;
+        }
+
+        /* Основное содержимое */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .warning {
+            display: none;
+            background-color: #1abc9c;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            min-height: 60vh;
+        }
+
+        /* Подвал */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-link {
+            color: #1abc9c;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: bold;
+        }
+
+        .footer-link:hover {
+            color: #16a085;
+            text-decoration: underline;
+        }
+
+        .copyright {
+            padding: 0 30vw;
+            text-align: left;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Шапка -->
+    <header>
+        <h1 class="header-title">КЕГЭ Информатика</h1>
+        <p class="header-subtitle">Подготовка к ЕГЭ по информатике 2025</p>
+    </header>
+
+    <!-- Навигация -->
+    <nav>
+        <a href="#" class="nav-link active" data-page="about">Об экзамене</a>
+        <a href="#" class="nav-link" data-page="generator">Генератор заданий</a>
+        <a href="#" class="nav-link" data-page="pravo">Правовая информация</a>
+        <a href="#" class="nav-link" data-page="me">О создателях сайта</a>
+    </nav>
+
+    <!-- Основное содержимое -->
+    <main>
+        <div class="warning">
+            <h1>Вы находитесь на локальной версии сайта</h1>
+            <h3>Через <span id="countdown">10</span> секунд(ы) вы будите автоматически перенаправлены на онлайн-версию.</р>
+        </div>
+        <div class="content" id="content">
+            <!-- Контент будет загружаться динамически -->
+            <iframe src="pages/about.html" frameborder="0"
+                style="width: 100%; height: 100%; min-height: 60vh;"></iframe>
+        </div>
+    </main>
+
+    <!-- Ссылки и авторское право -->
+    <footer>
+        <div class="footer-links">
+            <a href="https://fipi.ru" class="footer-link" target="_blank">ФИПИ</a>
+            <a href="https://edu.gov.ru" class="footer-link" target="_blank">Минпросвещения РФ</a>
+            <a href="https://obrnadzor.gov.ru" class="footer-link" target="_blank">Рособрнадзор</a>
+        </div>
+        <p class="copyright">
+            <br>Разработка: <b>© Петров Алексей, 2025</b>
+            <br>Решения заданий: <b>© Звоновский Денис,  2025</b>
+            
+            <br><br><strong>Подготовка к КЕГЭ по информатике, 2025. Все права защищены.</strong>
+            <br><small>Тексты заданий и иллюстраций принадлежат их владельцам. Информация об экзамене и
+                правовая информация взяты из открытых источников.</small>
+        </p>
+    </footer>
+
+    <!-- Подгрузка страниц -->
+    <script>
+        // Обработка навигации
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Удаляем активный класс у всех ссылок
+                document.querySelectorAll('.nav-link').forEach(el => {
+                    el.classList.remove('active');
+                });
+
+                // Добавляем активный класс текущей ссылке
+                this.classList.add('active');
+
+                // Загружаем соответствующую страницу
+                const page = this.getAttribute('data-page');
+                let url;
+
+                switch (page) {
+                    case 'about':
+                        url = 'pages/about.html';
+                        break;
+                    case 'generator':
+                        url = 'generator/index.html';
+                        break;
+                    case 'pravo':
+                        url = 'pages/pravo.html';
+                        break;
+                    case 'me':
+                        url = 'pages/me.html';
+                        break;
+                }
+
+                // Обновляем iframe
+                document.querySelector('#content iframe').src = url;
+            });
+        });
+    </script>
+
+
+    <!-- Проверка на локальный файл -->
+    <script src="is_local.js"></script>
+</body>
+
+</html>
