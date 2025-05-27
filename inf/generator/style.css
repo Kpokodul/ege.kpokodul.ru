@@ -105,7 +105,8 @@ h3 {
 
 .error-message {
     color: red;
-    margin-top: 5px;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
 }
 
 .solution {
@@ -220,4 +221,82 @@ h3 {
 
 h4 {
     margin-bottom: 10px;
+}
+
+
+.form-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+    color: #2c3e50;
+    min-width: 180px;
+}
+
+input[type="text"],
+select {
+    padding: 0.6rem 0.8rem;
+    border: 2px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 1rem;
+    flex: 1;
+    min-width: 200px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: #1abc9c;
+}
+
+button {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #16a085;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    /* Ширина вертикальной полосы */
+    height: 10px;
+    /* Высота горизонтальной полосы */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Цвет трека */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1abc9c;
+    /* Основной зеленый цвет */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #16a085;
+    /* Темно-зеленый при наведении */
 }

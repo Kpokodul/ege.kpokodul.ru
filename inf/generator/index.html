@@ -15,25 +15,30 @@
 <body>
 </div>
     <h1>Генератор заданий</h1>
-        <!-- Форма поиска по ID -->
-    <div>
-        <label for="task-search">Поиск задания по ID:</label>
-        <input type="text" id="task-search" placeholder="Например: 010001">
-        <button onclick="showTaskById()">Показать</button>
-        <div id="search-error" class="error-message"></div>
+    
+    <!-- Форма поиска по ID -->
+    <div class="form-container">
+        <div class="form-group">
+            <label for="task-search">Поиск задания по ID:</label>
+            <input type="text" id="task-search" placeholder="Например: 010001">
+            <button onclick="showTaskById()">Показать</button>
+            <div id="search-error" class="error-message"></div>
+        </div>
     </div>
 
-    <!-- Форма выбора группы -->
-    <form>
-        <label for="groups">Выберите группу:</label>
-        <select id="groups" name="groups">
-            <option value="01">1. Анализ информационных моделей</option>
-            <option value="02">2. Таблицы истинности логических выражений</option>
-            <option value="08">8. Комбинаторика</option>
-            <option value="13">13. IP-адреса и маски</option>
-        </select>
-        <button type="button" onclick="showSelectedGroup()">Открыть</button>
-    </form>
+        <!-- Форма выбора группы -->
+    <div class="form-container">
+        <form class="form-group">
+            <label for="groups">Выберите группу:</label>
+            <select id="groups" name="groups">
+                <option value="01">1. Анализ информационных моделей</option>
+                <option value="02">2. Таблицы истинности логических выражений</option>
+                <option value="08">8. Комбинаторика</option>
+                <option value="13">13. IP-адреса и маски</option>
+            </select>
+            <button type="button" onclick="showSelectedGroup()">Открыть</button>
+        </form>
+    </div>
 
     <!-- Группа 01 -->
     <div id="group-01" class="group">
@@ -157,7 +162,7 @@
         </div>
     </div>
 
-    <!-- Группа 08 -->
+    <!-- Группа 05 -->
     <div id="group-05" class="group">
         <h2>8. Комбинаторика</h2>
 
